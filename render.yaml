@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: resultados-uvp
+    runtime: static
+    branch: main
+    buildCommand: ""
+    staticPublishPath: .
