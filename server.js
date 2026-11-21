@@ -182,6 +182,9 @@ app.delete("/api/users/:id", requireAuth, requireAdmin, async (req, res, next) =
   } catch (err) { next(err); }
 });
 
+app.get("/Dashboard_UVP_actualizado.html", requireAuth, (req, res) =>
+  res.sendFile(path.join(__dirname, "Dashboard_UVP_actualizado.html"))
+);
 app.get(["/server.js", "/package.json", "/render.yaml", "/appwrite.config.json"], (req, res) => res.sendStatus(404));
 app.use(express.static(path.join(__dirname), { index: "index.html", dotfiles: "deny" }));
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
