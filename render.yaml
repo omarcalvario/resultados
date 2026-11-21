@@ -1,7 +1,27 @@
 services:
   - type: web
     name: resultados-uvp
-    runtime: static
+    runtime: node
     branch: main
-    buildCommand: ""
-    staticPublishPath: .
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/me
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: resultados-uvp-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_NAME
+        value: Administrador
+databases:
+  - name: resultados-uvp-db
+    plan: basic-256mb
+    databaseName: resultados_uvp
+    user: resultados_uvp
